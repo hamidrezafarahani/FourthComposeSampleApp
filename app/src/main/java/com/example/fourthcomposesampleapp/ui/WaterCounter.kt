@@ -24,13 +24,16 @@ fun WaterCounter(
         modifier = modifier.padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = "You've had $count glasses.",
-            modifier = modifier.padding(16.dp)
-        )
+        if (count > 0) {
+            Text(
+                text = "You've had $count glasses.",
+                modifier = modifier.padding(16.dp)
+            )
+        }
         Button(
             modifier = Modifier.padding(top = 8.dp),
-            onClick = { count++ }
+            onClick = { count++ },
+            enabled = count < 10
         ) {
             Text(text = "Add one")
         }
