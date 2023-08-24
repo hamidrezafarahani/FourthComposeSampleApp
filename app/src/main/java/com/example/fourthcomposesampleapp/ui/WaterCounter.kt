@@ -25,6 +25,14 @@ fun WaterCounter(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         if (count > 0) {
+            var showTask by rememberSaveable {
+                mutableStateOf(true)
+            }
+            if (showTask) {
+                WellnessTaskItem(taskName = "Have you taken your 15 minute walk today?") {
+                    showTask = false
+                }
+            }
             Text(
                 text = "You've had $count glasses.",
                 modifier = modifier.padding(16.dp)
