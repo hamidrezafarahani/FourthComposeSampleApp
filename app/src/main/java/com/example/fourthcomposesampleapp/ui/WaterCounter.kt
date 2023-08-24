@@ -1,6 +1,8 @@
 package com.example.fourthcomposesampleapp.ui
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -24,10 +26,13 @@ fun WaterCounter(
         modifier = modifier.padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        var showTask by rememberSaveable {
+            mutableStateOf(true)
+        }
         if (count > 0) {
-            var showTask by rememberSaveable {
+            /*var showTask by rememberSaveable {
                 mutableStateOf(true)
-            }
+            }*/
             if (showTask) {
                 WellnessTaskItem(taskName = "Have you taken your 15 minute walk today?") {
                     showTask = false
@@ -38,12 +43,26 @@ fun WaterCounter(
                 modifier = modifier.padding(16.dp)
             )
         }
-        Button(
-            modifier = Modifier.padding(top = 8.dp),
-            onClick = { count++ },
-            enabled = count < 10
+        Row(
+            modifier = Modifier.padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = "Add one")
+            Button(
+                modifier = Modifier.padding(vertical = 8.dp, horizontal = 4.dp),
+                onClick = { count++ },
+                enabled = count < 10
+            ) {
+                Text(text = "Add one")
+            }
+
+            Button(
+                modifier = Modifier.padding(vertical = 8.dp, horizontal = 4.dp),
+                onClick = { count = 0 }
+            ) {
+                Text(text = "Clear water count")
+            }
         }
+
     }
 }
