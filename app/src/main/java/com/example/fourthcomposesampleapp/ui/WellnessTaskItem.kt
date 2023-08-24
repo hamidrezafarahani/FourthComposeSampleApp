@@ -5,11 +5,16 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -19,6 +24,8 @@ import com.example.fourthcomposesampleapp.ui.theme.FourthComposeSampleAppTheme
 fun WellnessTaskItem(
     modifier: Modifier = Modifier,
     taskName: String,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
     onClose: () -> Unit
 ) {
     Row(modifier) {
@@ -29,10 +36,27 @@ fun WellnessTaskItem(
                 .padding(16.dp),
             style = MaterialTheme.typography.titleMedium
         )
+        Checkbox(checked = checked, onCheckedChange = onCheckedChange)
         IconButton(onClick = onClose) {
             Icon(imageVector = Icons.Default.Close, contentDescription = "Close")
         }
     }
+}
+
+@Composable
+fun WellnessTaskItem(
+    modifier: Modifier = Modifier,
+    taskName: String
+) {
+    var checkState by rememberSaveable {
+        mutableStateOf(false)
+    }
+    WellnessTaskItem(
+        modifier = modifier,
+        taskName = taskName,
+        checked = checkState,
+        onCheckedChange = { checkState = it }
+    ) {}
 }
 
 
@@ -48,7 +72,7 @@ fun WellnessTaskItem(
 @Composable
 fun WellnessTaskItemPreview() {
     FourthComposeSampleAppTheme {
-        WellnessTaskItem(taskName = "This is task") {}
+        WellnessTaskItem(taskName = "This is task")
     }
 }
 

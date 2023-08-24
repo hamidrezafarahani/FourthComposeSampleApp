@@ -34,7 +34,11 @@ fun WaterCounter(
                 mutableStateOf(true)
             }*/
             if (showTask) {
-                WellnessTaskItem(taskName = "Have you taken your 15 minute walk today?") {
+                WellnessTaskItem(
+                    taskName = "Have you taken your 15 minute walk today?",
+                    checked = true,
+                    onCheckedChange = {}
+                ) {
                     showTask = false
                 }
             }
