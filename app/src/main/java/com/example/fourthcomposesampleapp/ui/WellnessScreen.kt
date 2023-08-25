@@ -5,18 +5,19 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.fourthcomposesampleapp.data.Repository
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.fourthcomposesampleapp.ui.theme.FourthComposeSampleAppTheme
-import com.example.fourthcomposesampleapp.utils.rememberMutableStateListOf
 
 @Composable
-fun WellnessScreen(modifier: Modifier = Modifier) {
+fun WellnessScreen(
+    modifier: Modifier = Modifier,
+    wellnessViewModel: WellnessViewModel = viewModel()
+) {
     Column(modifier) {
         WaterCounter()
 
-        val list = rememberMutableStateListOf(Repository.getWellnessTask())
-        WellnessTaskList(list = list) {
-            list.remove(it)
+        WellnessTaskList(list = wellnessViewModel.tasks) {
+            wellnessViewModel.remove(it)
         }
     }
 
