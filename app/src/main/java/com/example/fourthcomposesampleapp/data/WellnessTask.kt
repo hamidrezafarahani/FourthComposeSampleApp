@@ -1,3 +1,7 @@
 package com.example.fourthcomposesampleapp.data
 
-data class WellnessTask(val id: Int, val label: String)
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class WellnessTask(val id: Int, val label: String): Parcelable
