@@ -10,15 +10,20 @@ import com.example.fourthcomposesampleapp.data.WellnessTask
 fun WellnessTaskList(
     modifier: Modifier = Modifier,
     list: List<WellnessTask>,
+    onCheckedChange: (WellnessTask, Boolean) -> Unit,
     onCloseTask: (WellnessTask) -> Unit
 ) {
     LazyColumn(modifier) {
         items(
             items = list,
             key = { it.id }
-        ) {
-            WellnessTaskItem(taskName = it.label) {
-                onCloseTask(it)
+        ) { wellnessTask ->
+            WellnessTaskItem(
+                taskName = wellnessTask.label,
+                checked = wellnessTask.checked,
+                onCheckedChange = { check -> onCheckedChange(wellnessTask, check) }
+            ) {
+                onCloseTask(wellnessTask)
             }
         }
     }

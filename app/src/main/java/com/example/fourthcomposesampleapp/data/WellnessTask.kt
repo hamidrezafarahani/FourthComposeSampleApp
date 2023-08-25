@@ -1,7 +1,11 @@
 package com.example.fourthcomposesampleapp.data
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 
-@Parcelize
-data class WellnessTask(val id: Int, val label: String): Parcelable
+
+class WellnessTask(val id: Int, val label: String, initialCheck: Boolean = false) {
+
+    var checked by mutableStateOf(initialCheck)
+}

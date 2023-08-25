@@ -1,6 +1,5 @@
 package com.example.fourthcomposesampleapp.ui
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -11,14 +10,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.fourthcomposesampleapp.ui.theme.FourthComposeSampleAppTheme
 
 @Composable
 fun WellnessTaskItem(
@@ -42,40 +35,3 @@ fun WellnessTaskItem(
         }
     }
 }
-
-@Composable
-fun WellnessTaskItem(
-    modifier: Modifier = Modifier,
-    taskName: String,
-    onCloseTask: () -> Unit
-) {
-    var checkState by rememberSaveable {
-        mutableStateOf(false)
-    }
-    WellnessTaskItem(
-        modifier = modifier,
-        taskName = taskName,
-        checked = checkState,
-        onCheckedChange = { checkState = it }
-    ) {
-        onCloseTask()
-    }
-}
-
-
-@Preview(
-    "Light Mode",
-    showBackground = true
-)
-@Preview(
-    "Dark Mode",
-    showBackground = true,
-    uiMode = Configuration.UI_MODE_NIGHT_YES
-)
-@Composable
-fun WellnessTaskItemPreview() {
-    FourthComposeSampleAppTheme {
-        WellnessTaskItem(taskName = "This is task") {}
-    }
-}
-
